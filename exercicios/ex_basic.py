@@ -48,4 +48,10 @@ print(lista[-1])
 print(lista[-2])
 
 #testes
-print(lista[2:3])
+# : dois pontos representa toda a lista. Primeiro item é incluído, e a partir do segundo é excluído
+print(lista[:3])
+
+print(lista[3:4])
+
+#index
+print(lista.index('Vasco'))
