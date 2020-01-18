@@ -112,4 +112,5 @@ lista.insert(0,'Sport') - adiciona Sport ao à lista, de acordo com o index
 lista.remove('Sport') - Remove Sport da lista, de acordo com o index
 lista.pop(0) - Remove o item da lista, de acordo com o index
 
+lista.sort()
 l = sorted(lista) - Ordena os itens da lita
