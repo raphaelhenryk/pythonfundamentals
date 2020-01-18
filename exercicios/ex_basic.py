@@ -40,3 +40,12 @@ print(lista[1][2], lista[4][3], lista[6])
 print(lista[1][3], lista[3], lista[4][4])
 # print Corinthians, 2, 10, 14
 print(lista[0], lista[1][1], lista[4][0], lista[4][4])
+
+#pega o ultimo
+print(lista[-1])
+
+#pega o peultimo
+print(lista[-2])
+
+#testes
+print(lista[2:3])
