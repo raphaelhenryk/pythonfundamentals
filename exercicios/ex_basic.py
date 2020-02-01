@@ -44,8 +44,9 @@ print(lista[0], lista[1][1], lista[4][0], lista[4][4])
 #pega o ultimo
 print(lista[-1])
 
-#pega o peultimo
+#pega o peultimo: O ultimo item da lista sempre será o -1
 print(lista[-2])
+
 
 #testes
 # : dois pontos representa toda a lista. Primeiro item é incluído, e a partir do segundo é excluído

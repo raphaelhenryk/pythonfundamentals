@@ -114,3 +114,16 @@ lista.pop(0) - Remove o item da lista, de acordo com o index
 
 lista.sort()
 l = sorted(lista) - Ordena os itens da lita
+
+
+==========================================AULA 2===========================================
+Métodos de String:
+
+texto = 'Isso é um texto'
+
+texto.upper()
+texto.lower()
+texto.capitalize()
+print(texto.split(''))
+
+
