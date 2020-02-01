@@ -34,3 +34,8 @@ print(dados_clientes['clientes']['cl002']['nome'],
 
 codigo_cliente = input('Digite o codigo do cliente: ')
 print(dados_clientes['clientes'][codigo_cliente])
+
+
+
+
+
