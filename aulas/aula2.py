@@ -36,21 +36,18 @@ codigo_cliente = input('Digite o codigo do cliente: ')
 print(dados_clientes['clientes'][codigo_cliente])
 
 
-
-
 # ======================================= Trataento de Exceções com while
 
 lista_logins = {'Raphael': '123456', 'Renan': '45678'}
 
 while True:
-      try:
-            user_login = input('Digite o nome de usuário: \n>')
-            if user_login not in lista_logins:
-                  print('Usuário ', user_login, ' nao cadastrado.')
-                  break
-            else:
-                  raise Exception('Usuario  não Cadastrado')
-                  continue
-      except Exception as e:
-            print(e)
-
+    try:
+        user_login = input('Digite o nome de usuário: \n>')
+        if user_login not in lista_logins:
+            print('Usuário ', user_login, ' nao cadastrado.')
+            break
+        else:
+            raise Exception('Usuario  não Cadastrado')
+            continue
+    except Exception as e:
+        print(e)
