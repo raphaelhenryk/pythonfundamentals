@@ -1,0 +1,466 @@
+developer@developer:~$ sudo su -
+[sudo] senha para developer: 
+root@developer:~# su - postgres
+postgres@developer:~$ select * from dual
+-su: erro de sintaxe próximo ao token inesperado `from'
+postgres@developer:~$ psql
+psql: não pôde conectar ao servidor: Arquivo ou diretório inexistente
+	O servidor está executando localmente e aceitando
+	conexões no soquete de domínio Unix "/var/run/postgresql/.s.PGSQL.5432"?
+postgres@developer:~$ systemctl start postgresql
+postgres@developer:~$ psql
+psql (11.1 (Ubuntu 11.1-3.pgdg18.04+1), servidor 10.6 (Ubuntu 10.6-1.pgdg18.04+1))
+Digite "help" para ajuda.
+
+postgres=# 
+postgres=# create user admin password '4linux';
+CREATE ROLE
+postgres=# create database projeto owner admin;
+CREATE DATABASE
+postgres=# \q
+postgres@developer:~$ psql -h localhost -U admin projeto
+Senha para usuário admin: 
+psql (11.1 (Ubuntu 11.1-3.pgdg18.04+1), servidor 10.6 (Ubuntu 10.6-1.pgdg18.04+1))
+conexão SSL (protocolo: TLSv1.3, cifra: TLS_AES_256_GCM_SHA384, bits: 256, compressão: desabilitado)
+Digite "help" para ajuda.
+
+projeto=> create table scripts
+projeto-> ^C
+projeto=> create table scripts(id serial, nome varchar(100), conteudo text);
+CREATE TABLE
+projeto=> select * from scripts
+projeto-> \dt
+         Lista de relações
+ Esquema |  Nome   |  Tipo  | Dono  
+---------+---------+--------+-------
+ public  | scripts | tabela | admin
+(1 registro)
+
+projeto-> \d scrips
+Não encontrou nenhuma relação chamada "scrips".
+projeto-> \d scripts
+projeto-> select * from scripts
+projeto-> ;
+ERROR:  syntax error at or near "select"
+LINHA 2: select * from scripts
+         ^
+projeto=> select * from scripts;
+ id | nome | conteudo 
+----+------+----------
+(0 registro)
+
+projeto=> insert into scripts(nome, conteudo) values ('hello.py','print("script de teste")');
+INSERT 0 1
+projeto=> select * from scripts
+projeto-> ^C
+projeto=> select * from scripts;
+ id |   nome   |         conteudo         
+----+----------+--------------------------
+  1 | hello.py | print("script de teste")
+(1 registro)
+
+projeto=> 
+projeto=> 
+projeto=> \q
+postgres@developer:~$ sair
+
+Command 'sair' not found, did you mean:
+
+  command 'sar' from deb sysstat
+  command 'sail' from deb bsdgames
+
+Try: apt install <deb name>
+
+postgres@developer:~$ sair
+root@developer:~# systemctl start mysql.service 
+root@developer:~# systemctl start mysql
+root@developer:~# 
+root@developer:~# mysql -U
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.25-0ubuntu0.18.04.2 (Ubuntu)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| sys                |
++--------------------+
+5 rows in set (0.05 sec)
+
+mysql> create database projetos;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use projetos;
+Database changed
+mysql> grant all privileges on projetos.* to admin@'localhost' identified by '4linux' with grant option;
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> exit;
+Bye
+root@developer:~# mysql -u admn -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'admn'@'localhost' (using password: YES)
+root@developer:~# mysql -u admin -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 4
+Server version: 5.7.25-0ubuntu0.18.04.2 (Ubuntu)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use projetos
+Database changed
+mysql> show tables
+    -> 
+    -> ;
+Empty set (0.00 sec)
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| projetos           |
++--------------------+
+2 rows in set (0.00 sec)
+
+mysql> create table clientes(id integer primary key not null auto increment, nome varchar(100), endereco varchar(200));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'auto increment, nome varchar(100), endereco varchar(200))' at line 1
+mysql> create table clientes(id integer primary key not null auto increment, nome varchar(100), endereco varchar(200));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'auto increment, nome varchar(100), endereco varchar(200))' at line 1
+mysql> create table clientes(id integer primary key not null auto increment, nome varchar(100), endereco varchar(200));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'auto increment, nome varchar(100), endereco varchar(200))' at line 1
+mysql> create table clientes(id integer primary key not null auto increment, nome char(100), endereco char(200));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'auto increment, nome char(100), endereco char(200))' at line 1
+mysql> create table clientes(id int primary key not null auto increment, nome char(100), endereco char(200)); 
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'auto increment, nome char(100), endereco char(200))' at line 1
+mysql> create table clientes(id int primary key not null auto_increment, nome char(100), endereco char(200)); 
+Query OK, 0 rows affected (1.01 sec)
+
+mysql> sair;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'sair' at line 1
+mysql> sair
+    -> 
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'sair' at line 1
+mysql> ^DBye
+root@developer:~# apt install mongodb
+Lendo listas de pacotes... Pronto
+Construindo árvore de dependências       
+Lendo informação de estado... Pronto
+The following additional packages will be installed:
+  libboost-filesystem1.65.1 libboost-iostreams1.65.1 libboost-program-options1.65.1 libgoogle-perftools4 libtcmalloc-minimal4 libyaml-cpp0.5v5
+  mongo-tools mongodb-clients mongodb-server mongodb-server-core
+Os NOVOS pacotes a seguir serão instalados:
+  libboost-filesystem1.65.1 libboost-iostreams1.65.1 libboost-program-options1.65.1 libgoogle-perftools4 libtcmalloc-minimal4 libyaml-cpp0.5v5
+  mongo-tools mongodb mongodb-clients mongodb-server mongodb-server-core
+0 pacotes atualizados, 11 pacotes novos instalados, 0 a serem removidos e 496 não atualizados.
+É preciso baixar 53,4 MB de arquivos.
+Depois desta operação, 217 MB adicionais de espaço em disco serão usados.
+Você quer continuar? [S/n] s
+Obter:1 http://br.archive.ubuntu.com/ubuntu bionic/main amd64 libboost-filesystem1.65.1 amd64 1.65.1+dfsg-0ubuntu5 [40,3 kB]
+Obter:2 http://br.archive.ubuntu.com/ubuntu bionic/main amd64 libboost-iostreams1.65.1 amd64 1.65.1+dfsg-0ubuntu5 [29,2 kB]
+Obter:3 http://br.archive.ubuntu.com/ubuntu bionic/main amd64 libboost-program-options1.65.1 amd64 1.65.1+dfsg-0ubuntu5 [137 kB]
+Obter:4 http://br.archive.ubuntu.com/ubuntu bionic/main amd64 libtcmalloc-minimal4 amd64 2.5-2.2ubuntu3 [91,6 kB]
+Obter:5 http://br.archive.ubuntu.com/ubuntu bionic/main amd64 libgoogle-perftools4 amd64 2.5-2.2ubuntu3 [190 kB]
+Obter:6 http://br.archive.ubuntu.com/ubuntu bionic/universe amd64 libyaml-cpp0.5v5 amd64 0.5.2-4ubuntu1 [150 kB]
+Obter:7 http://br.archive.ubuntu.com/ubuntu bionic/universe amd64 mongo-tools amd64 3.6.3-0ubuntu1 [12,3 MB]
+Obter:8 http://br.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 mongodb-clients amd64 1:3.6.3-0ubuntu1.1 [20,2 MB]                        
+Obter:9 http://br.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 mongodb-server-core amd64 1:3.6.3-0ubuntu1.1 [20,3 MB]                    
+Obter:10 http://br.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 mongodb-server all 1:3.6.3-0ubuntu1.1 [12,6 kB]                          
+Obter:11 http://br.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 mongodb amd64 1:3.6.3-0ubuntu1.1 [9.968 B]                               
+Baixados 53,4 MB em 1min 15s (714 kB/s)                                                                                                             
+A seleccionar pacote anteriormente não seleccionado libboost-filesystem1.65.1:amd64.
+(Lendo banco de dados ... 187883 ficheiros e directórios actualmente instalados.)
+A preparar para desempacotar .../00-libboost-filesystem1.65.1_1.65.1+dfsg-0ubuntu5_amd64.deb ...
+A descompactar libboost-filesystem1.65.1:amd64 (1.65.1+dfsg-0ubuntu5) ...
+A seleccionar pacote anteriormente não seleccionado libboost-iostreams1.65.1:amd64.
+A preparar para desempacotar .../01-libboost-iostreams1.65.1_1.65.1+dfsg-0ubuntu5_amd64.deb ...
+A descompactar libboost-iostreams1.65.1:amd64 (1.65.1+dfsg-0ubuntu5) ...
+A seleccionar pacote anteriormente não seleccionado libboost-program-options1.65.1:amd64.
+A preparar para desempacotar .../02-libboost-program-options1.65.1_1.65.1+dfsg-0ubuntu5_amd64.deb ...
+A descompactar libboost-program-options1.65.1:amd64 (1.65.1+dfsg-0ubuntu5) ...
+A seleccionar pacote anteriormente não seleccionado libtcmalloc-minimal4.
+A preparar para desempacotar .../03-libtcmalloc-minimal4_2.5-2.2ubuntu3_amd64.deb ...
+A descompactar libtcmalloc-minimal4 (2.5-2.2ubuntu3) ...
+A seleccionar pacote anteriormente não seleccionado libgoogle-perftools4.
+A preparar para desempacotar .../04-libgoogle-perftools4_2.5-2.2ubuntu3_amd64.deb ...
+A descompactar libgoogle-perftools4 (2.5-2.2ubuntu3) ...
+A seleccionar pacote anteriormente não seleccionado libyaml-cpp0.5v5:amd64.
+A preparar para desempacotar .../05-libyaml-cpp0.5v5_0.5.2-4ubuntu1_amd64.deb ...
+A descompactar libyaml-cpp0.5v5:amd64 (0.5.2-4ubuntu1) ...
+A seleccionar pacote anteriormente não seleccionado mongo-tools.
+A preparar para desempacotar .../06-mongo-tools_3.6.3-0ubuntu1_amd64.deb ...
+A descompactar mongo-tools (3.6.3-0ubuntu1) ...
+A seleccionar pacote anteriormente não seleccionado mongodb-clients.
+A preparar para desempacotar .../07-mongodb-clients_1%3a3.6.3-0ubuntu1.1_amd64.deb ...
+A descompactar mongodb-clients (1:3.6.3-0ubuntu1.1) ...
+A seleccionar pacote anteriormente não seleccionado mongodb-server-core.
+A preparar para desempacotar .../08-mongodb-server-core_1%3a3.6.3-0ubuntu1.1_amd64.deb ...
+A descompactar mongodb-server-core (1:3.6.3-0ubuntu1.1) ...
+A seleccionar pacote anteriormente não seleccionado mongodb-server.
+A preparar para desempacotar .../09-mongodb-server_1%3a3.6.3-0ubuntu1.1_all.deb ...
+A descompactar mongodb-server (1:3.6.3-0ubuntu1.1) ...
+A seleccionar pacote anteriormente não seleccionado mongodb.
+A preparar para desempacotar .../10-mongodb_1%3a3.6.3-0ubuntu1.1_amd64.deb ...
+A descompactar mongodb (1:3.6.3-0ubuntu1.1) ...
+Configurando libboost-iostreams1.65.1:amd64 (1.65.1+dfsg-0ubuntu5) ...
+A processar 'triggers' para ureadahead (0.100.0-20) ...
+Configurando libboost-filesystem1.65.1:amd64 (1.65.1+dfsg-0ubuntu5) ...
+Configurando libtcmalloc-minimal4 (2.5-2.2ubuntu3) ...
+Configurando libgoogle-perftools4 (2.5-2.2ubuntu3) ...
+A processar 'triggers' para libc-bin (2.27-3ubuntu1) ...
+A processar 'triggers' para systemd (237-3ubuntu10.12) ...
+A processar 'triggers' para man-db (2.8.3-2ubuntu0.1) ...
+Configurando libyaml-cpp0.5v5:amd64 (0.5.2-4ubuntu1) ...
+Configurando libboost-program-options1.65.1:amd64 (1.65.1+dfsg-0ubuntu5) ...
+Configurando mongo-tools (3.6.3-0ubuntu1) ...
+Configurando mongodb-clients (1:3.6.3-0ubuntu1.1) ...
+Configurando mongodb-server-core (1:3.6.3-0ubuntu1.1) ...
+Configurando mongodb-server (1:3.6.3-0ubuntu1.1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/mongodb.service → /lib/systemd/system/mongodb.service.
+Configurando mongodb (1:3.6.3-0ubuntu1.1) ...
+A processar 'triggers' para libc-bin (2.27-3ubuntu1) ...
+A processar 'triggers' para systemd (237-3ubuntu10.12) ...
+A processar 'triggers' para ureadahead (0.100.0-20) ...
+root@developer:~# systemctl start mongodb
+root@developer:~# mongo
+MongoDB shell version v3.6.3
+connecting to: mongodb://127.0.0.1:27017
+MongoDB server version: 3.6.3
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+	http://docs.mongodb.org/
+Questions? Try the support group
+	http://groups.google.com/group/mongodb-user
+Server has startup warnings: 
+2020-02-15T16:56:33.113-0200 I STORAGE  [initandlisten] 
+2020-02-15T16:56:33.113-0200 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2020-02-15T16:56:33.113-0200 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2020-02-15T16:56:39.222-0200 I CONTROL  [initandlisten] 
+2020-02-15T16:56:39.222-0200 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-02-15T16:56:39.222-0200 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-02-15T16:56:39.222-0200 I CONTROL  [initandlisten] 
+> 
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use dexterops
+switched to db dexterops
+> show tables
+> show collections
+> db.fila.insert({"_id:1, "servico":"intranet", "status":0})
+2020-02-15T17:12:08.259-0200 E QUERY    [thread1] SyntaxError: missing : after property id @(shell):1:25
+> db.fila.insert({"_id":1, "servico":"intranet", "status":0})
+WriteResult({ "nInserted" : 1 })
+> db.fila.find()
+{ "_id" : 1, "servico" : "intranet", "status" : 0 }
+> db.fila.find("_id":1)
+2020-02-15T17:13:30.777-0200 E QUERY    [thread1] SyntaxError: missing ) after argument list @(shell):1:18
+> db.fila.find({"_id":1})
+{ "_id" : 1, "servico" : "intranet", "status" : 0 }
+> db.fila.remove({"_id":1})
+WriteResult({ "nRemoved" : 1 })
+> db.fila.find({"_id":1})
+> db.fila.insert({"_id":1, "empresa":"CoronaLoja", "produtos":[{"nome": "CoronaCamiseta", "preco": 19.90}, {"nome":"CoronaCalca","preco":159.90 }]})
+WriteResult({ "nInserted" : 1 })
+> db.fila.find()
+{ "_id" : 1, "empresa" : "CoronaLoja", "produtos" : [ { "nome" : "CoronaCamiseta", "preco" : 19.9 }, { "nome" : "CoronaCalca", "preco" : 159.9 } ] }
+> show dbs
+admin      0.000GB
+config     0.000GB
+dexterops  0.000GB
+local      0.000GB
+> 
+> 
+> 
+> 
+> ^C
+bye
+root@developer:~# mysql -u admn -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'admn'@'localhost' (using password: YES)
+root@developer:~# mysql -u admn -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'admn'@'localhost' (using password: YES)
+root@developer:~# mysql -u admin -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 7
+Server version: 5.7.25-0ubuntu0.18.04.2 (Ubuntu)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show tables
+    -> ;
+ERROR 1046 (3D000): No database selected
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| projetos           |
++--------------------+
+2 rows in set (0.00 sec)
+
+mysql> select database projetos;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'projetos' at line 1
+mysql> show database projetos;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database projetos' at line 1
+mysql> use projetos
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables
+    -> ;
++--------------------+
+| Tables_in_projetos |
++--------------------+
+| clientes           |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> exit
+Bye
+root@developer:~# su -u postgress
+su: opção inválida -- “u”
+Uso: su [opções] [LOGIN]
+
+Opções:
+  -c, --command COMANDO         passa COMANDO para o shell invocado
+  -h, --help                    exibe esta mensagem de ajuda e finaliza
+  -, -l, --login                torna o shell um shell de login
+  -m, -p,
+  --preserve-environment       não zera variáveis de ambiente e
+                                mantém o mesmo shell
+  -s, --shell SHELL             utiliza SHELL ao invés do padrão no passwd
+
+root@developer:~# su - postgress
+Nenhuma entrada de passwd para usuário 'postgress'
+root@developer:~# 4linux
+4linux: comando não encontrado
+root@developer:~# su - postgress
+Nenhuma entrada de passwd para usuário 'postgress'
+root@developer:~# su - postgress
+Nenhuma entrada de passwd para usuário 'postgress'
+root@developer:~# su - admin
+Nenhuma entrada de passwd para usuário 'admin'
+root@developer:~# su - postgress
+Nenhuma entrada de passwd para usuário 'postgress'
+root@developer:~# psql
+psql: FATAL:  role "root" does not exist
+root@developer:~# su - postgres
+postgres@developer:~$ psql
+psql (11.1 (Ubuntu 11.1-3.pgdg18.04+1), servidor 10.6 (Ubuntu 10.6-1.pgdg18.04+1))
+Digite "help" para ajuda.
+
+postgres=# show databases
+postgres-# psql -h localhost -U admin projeto
+postgres-# \q
+postgres@developer:~$ psql -h localhost -U admin projeto
+Senha para usuário admin: 
+psql (11.1 (Ubuntu 11.1-3.pgdg18.04+1), servidor 10.6 (Ubuntu 10.6-1.pgdg18.04+1))
+conexão SSL (protocolo: TLSv1.3, cifra: TLS_AES_256_GCM_SHA384, bits: 256, compressão: desabilitado)
+Digite "help" para ajuda.
+
+projeto=> select * from scripts
+projeto-> ;
+ id |   nome   |         conteudo         
+----+----------+--------------------------
+  1 | hello.py | print("script de teste")
+(1 registro)
+
+projeto=> select * from scripts
+;
+ id |   nome   |         conteudo         
+----+----------+--------------------------
+  1 | hello.py | print("script de teste")
+(1 registro)
+
+projeto=> sair
+projeto-> sair
+projeto-> ^C
+projeto=> ^C
+projeto=> exit
+postgres@developer:~$ exit
+sair
+root@developer:~# mongo
+MongoDB shell version v3.6.3
+connecting to: mongodb://127.0.0.1:27017
+MongoDB server version: 3.6.3
+Server has startup warnings: 
+2020-02-15T16:56:33.113-0200 I STORAGE  [initandlisten] 
+2020-02-15T16:56:33.113-0200 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2020-02-15T16:56:33.113-0200 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2020-02-15T16:56:39.222-0200 I CONTROL  [initandlisten] 
+2020-02-15T16:56:39.222-0200 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-02-15T16:56:39.222-0200 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-02-15T16:56:39.222-0200 I CONTROL  [initandlisten] 
+> show dbs
+admin      0.000GB
+config     0.000GB
+dexterops  0.000GB
+local      0.000GB
+> use {"nome":"python fundamentals",
+2020-02-15T18:49:44.209-0200 E QUERY    [thread1] SyntaxError: missing ) after argument list @(shellhelp2):1:25
+>                                                                 "carga horaria":40}^C
+bye
+root@developer:~# mongo
+MongoDB shell version v3.6.3
+connecting to: mongodb://127.0.0.1:27017
+MongoDB server version: 3.6.3
+Server has startup warnings: 
+2020-02-15T16:56:33.113-0200 I STORAGE  [initandlisten] 
+2020-02-15T16:56:33.113-0200 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2020-02-15T16:56:33.113-0200 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2020-02-15T16:56:39.222-0200 I CONTROL  [initandlisten] 
+2020-02-15T16:56:39.222-0200 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-02-15T16:56:39.222-0200 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-02-15T16:56:39.222-0200 I CONTROL  [initandlisten] 
+> use dexterops
+switched to db dexterops
+> show collections
+fila
+> db.fila.find()
+{ "_id" : 1, "empresa" : "CoronaLoja", "produtos" : [ { "nome" : "CoronaCamiseta", "preco" : 19.9 }, { "nome" : "CoronaCalca", "preco" : 159.9 } ] }
+> 
+> 
+> 
+> db.fila.find()
+{ "_id" : 1, "empresa" : "CoronaLoja", "produtos" : [ { "nome" : "CoronaCamiseta", "preco" : 19.9 }, { "nome" : "CoronaCalca", "preco" : 159.9 } ] }
+{ "_id" : 2, "empresa" : "4linux", "cursos" : [ { "nome" : "python fundamentals", "carga horaria" : 40 }, { "nome" : "linux fundamentals", "carga horaria" : 40 } ] }
+> 
