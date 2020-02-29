@@ -463,4 +463,6 @@ fila
 > db.fila.find()
 { "_id" : 1, "empresa" : "CoronaLoja", "produtos" : [ { "nome" : "CoronaCamiseta", "preco" : 19.9 }, { "nome" : "CoronaCalca", "preco" : 159.9 } ] }
 { "_id" : 2, "empresa" : "4linux", "cursos" : [ { "nome" : "python fundamentals", "carga horaria" : 40 }, { "nome" : "linux fundamentals", "carga horaria" : 40 } ] }
-> 
+>
+>
+> db.fila.remove({"_id" : 1})

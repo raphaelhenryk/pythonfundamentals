@@ -30,7 +30,7 @@ db = client['dexterops']
 
 def inserir_dados():
     try:
-        db.fila.insert({"_id": 2, "empresa": "4linux", "cursos": [{"nome": "python fundamentals",
+        db.fila.insert({"_id": 1, "empresa": "4linux", "cursos": [{"nome": "python fundamentals",
                                                                    "carga horaria": 40},
                                                                   {"nome": "linux fundamentals",
                                                                    "carga horaria": 40}
@@ -39,4 +39,36 @@ def inserir_dados():
     except Exception as e:
         print('Erro: {}'.format(e))
 
+
+def buscar_dados():
+    for r in db.fila.find():
+        print('Empresa: {}'.format(r['empresa']))
+        for c in r['cursos']:
+            print(20*'=')
+            print('Nome: {} \n Carga Horaria: {}'.format(
+                c['nome'], c['carga horaria']))
+
+
+def adicionar_sub():
+        db.fila.update({"_id": 1}, {"$addToSet":
+                                    {"instrutores": {'nome': 'Mariana',
+                                                     'email': 'mariana.albano@4linux.com.br'}}})
+
+
+def update_instrutor():
+        db.fila.update({"_id": 1, "instrutores.nome": "Mariana"},
+                       {"$set": {"instrutores.$.nome": "Marcela"}})
+
+
+def update_email():
+        db.fila.update({"_id": 1, "instrutores.email": "mariana@hotail.com"},
+                       {"$set": {"instrutores.$.email": "xurupita@gmail.com"}})
+
+
 inserir_dados()
+buscar_dados()
+adicionar_sub()
+update_instrutor()
+update_email()
+buscar_dados()
+
