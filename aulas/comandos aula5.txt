@@ -1,0 +1,103 @@
+595  ls -lt
+  596  cd exer*
+  597  cd aula4
+  598  python3 bancoDados.py
+  599  source deactivate
+  600  source /home/developer/pythonfundamentals/venv/bin/activate
+  601  ls -lt /home/developer/pythonfundamentals/venv/
+  602  ls -lt /home/developer/pythonfundamentals/venv/bin
+  603  $deactivate
+  604  conda deactivate
+  605  venv deactivate
+  606  deactivate
+  607  python3 bancoDados.py
+  608  source /home/developer/pythonfundamentals/venv/bin/activate
+  609  pip install pymon
+  610  pip install pymongo
+  611  python3 bancoDados.py
+  612  ls -lt
+  613  vd exe*
+  614  cd exe*
+  615  cd aula4
+  616  ls -lt
+  617  python bancoDados.py
+  618  venv
+  619  venv activate
+  620  cd /home/developer/pythonfundamentals/venv
+  621  venv activate
+  622  cd bin
+  623  ls -lt
+  624  activate
+  625  venv activate
+  626  venv
+  627  activate
+  628  .activate
+  629  ./activate
+  630  cd../..
+  631  cd ../..
+  632  ../venv/bin/act
+  633  ../venv/bin/actvate
+  634  ../venv/bin/activate
+  635  . venv/bin/activate
+  636  cd /home/developer/pythonfundamentals/exercicios/aula4
+  637  ls -lt
+  638  python bancoDados.py
+  639  mongo
+  640  python bancoDados.py
+  641  mongo
+  642  python bancoDados.py
+  643  pip install sqlalchey
+  644  pip install sqlalchemy
+  645  sudo apt update
+  646  sudo apt install sqlite3
+  647  sudo apt install libsqlite3.dev
+  648  sudo apt install sqlitebrowser
+  649  cd ..
+  650  cd orm
+  651  python coe
+  652  python core.py
+  653  python core_insert.py
+  654  python core_select.py
+  655  python core_select('Raphael')
+  656  python core_select.py
+  657  python core_update.py
+  658  python core_select.py
+  659  python core_delete.py
+  660  cd ..
+  661  python teste*
+  662  python tdd.py
+  663  pip install behaver
+  664  pip install behave
+  665  ls -lt
+  666  cd exe*
+  667  ls -lt
+  668  cd bdd
+  669  behave funcionalidades.feature
+  670  cd features
+  671  behave funcionalidades.feature
+  672  ls -lt
+  673  behave funcionalidades.feature
+  674  LS -LT
+  675  ls -lt
+  676  cd ..
+  677  cd features
+  678  behave funcionalidades.feature
+  679  . venv/bin/activate
+  680  cd ../../
+  681  cd ..
+  682  . venv/bin/activate
+  683  cd /exercicios/BDD/features
+  684  ls -lt
+  685  cd exe*
+  686  ls -lt
+  687  cd BDD
+  688  ls -lt
+  689  cd fe*
+  690  behave funcionalidades.feature
+  691  ip -ca
+  692  ip -c a
+  693  cd /home/developer/pythonfundamentals/chat/app.py
+  694  cd /home/developer/pythonfundamentals/chat/
+  695  python app.py
+  696  pip install paramiko
+  697  history
